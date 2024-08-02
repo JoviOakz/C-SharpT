@@ -106,7 +106,7 @@ public class MyList<T> : ICollection<T>
 
     public IEnumerator<T> GetEnumerator()
     {
-        throw new NotImplementedException();
+        return new MyIterator(first);
     }
 
     public bool Remove(T item)
@@ -116,30 +116,28 @@ public class MyList<T> : ICollection<T>
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        throw new NotImplementedException();
+        return GetEnumerator();
     }
 }
 
+public class MyIterator<T> : IEnumerator<T>
+{
+    public T Current => throw new NotImplementedException();
 
+    object IEnumerator.Current => throw new NotImplementedException();
 
-// public class MyIterator<T> : IEnumerator<T>
-// {
-//     public T Current => throw new NotImplementedException();
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
 
-//     object IEnumerator.Current => throw new NotImplementedException();
+    public bool MoveNext()
+    {
+        throw new NotImplementedException();
+    }
 
-//     public void Dispose()
-//     {
-//         throw new NotImplementedException();
-//     }
-
-//     public bool MoveNext()
-//     {
-//         throw new NotImplementedException();
-//     }
-
-//     public void Reset()
-//     {
-//         throw new NotImplementedException();
-//     }
-// }
+    public void Reset()
+    {
+        throw new NotImplementedException();
+    }
+}
