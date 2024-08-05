@@ -1,143 +1,96 @@
-﻿using System.Collections;
-
-Console.BackgroundColor = ConsoleColor.Magenta;
+﻿Console.BackgroundColor = ConsoleColor.Magenta;
 Console.WriteLine("Hello, World!");
 
+List<int> list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
+// var queryCount = list.Count();
+// Console.WriteLine(queryCount);
 
-// public interface IEnumerator<T>
-// {
-//     bool MoveNext();
-//     T Current { get; }
-// }
+// var queryTake = list.Take(3);
+// var querySkip = list.Skip(3);
+// var queryToArray = list.ToArray();
+// var queryAppend = list.Append(3);
+var queryPrepend = list.Prepend(3);
+foreach (var item in queryPrepend)
+    Console.WriteLine(item);
 
-
-
-// public interface IEnumerable<T>
-// {
-//     IEnumerator<T> GetEnumerator();
-// }
-
-
-
-// printValues(new int[10]);
-
-// void printValues<T>(IEnumerable<T> coll)
-// {
-//     var it = coll.GetEnumerator();
-//     while (it.MoveNext())
-//     {
-//         var value = it.Current;
-//         Console.WriteLine(value);
-//     }
-// }
-
-
-
-public class MyList<T> : ICollection<T>
+public static class Enumerable
 {
-
-    class MyNode
+    public static IEnumerable<T> Take<T>(this IEnumerable<T> collection, int count) 
     {
-        public T Data { get; set; }
-        public MyNode Next { get; set; }
-    }
-    MyNode first = null;
-    MyNode last = null;
-
-    int count = 0;
-
-    public int Count => count;
-
-    public bool IsReadOnly => false;
-
-    public void Add(T item)
-    {
-        var newNode = new MyNode { Data = item };
-        if (first == null)
+        var it = collection.GetEnumerator();
+        for (int i = 0; i < count && it.MoveNext(); i++)
         {
-            first = last = newNode;
-        }
-        else 
-        {
-            first.Next = newNode;
-            first = newNode;    
-        }
-
-        count++;
-    }
-
-    public void Clear()
-    {
-        first = last = null;
-        count = 0;
-    }
-
-    public bool Contains(T item)
-    {
-        var current = first;
-        while (first != null)
-        {
-            if (EqualityComparer<T>.Default.Equals(current.Data, item))
-                return true;
-
-            current = current.Next;
-        }
-
-        return false;
-    }
-
-    public void CopyTo(T[] array, int arrayIndex)
-    {
-        if (array == null)
-            throw new ArgumentNullException(nameof(array));
-        if (arrayIndex < 0)
-            throw new ArgumentOutOfRangeException(nameof(arrayIndex));
-        if (arrayIndex + count > array.Length)
-            throw new ArgumentException("The array is not large enough.");
-
-        var current = first;
-        while (current != null)
-        {
-            array[arrayIndex++] = current.Data;
-            current = current.Next;
+            yield return it.Current;
         }
     }
 
-    public IEnumerator<T> GetEnumerator()
+    public static IEnumerable<T> Skip<T>(this IEnumerable <T> collection, int count)
     {
-        return new MyIterator(first);
+        var it = collection.GetEnumerator();
+        for (int i = 0; i < count && it.MoveNext(); i++)
+        {
+            continue;
+        }
+
+        while (it.MoveNext())
+        {
+            yield return it.Current;
+        }
     }
 
-    public bool Remove(T item)
+    public static int Count<T>(this IEnumerable <T> collection)
     {
-        throw new NotImplementedException();
+        var it = collection.GetEnumerator();
+        var cont = 0;
+        foreach (var item in collection)
+        {
+            cont++;
+        }
+
+        return cont;
     }
 
-    IEnumerator IEnumerable.GetEnumerator()
+    public static T[] ToArray<T>(this IEnumerable <T> collection)
     {
-        return GetEnumerator();
-    }
-}
+        T[] array = new T[collection.Count()];
+        int index = 0;
+        foreach (var item in collection)
+        {
+            array[index] = item;
+            index++;
+        }
 
-public class MyIterator<T> : IEnumerator<T>
-{
-    public T Current => throw new NotImplementedException();
-
-    object IEnumerator.Current => throw new NotImplementedException();
-
-    public void Dispose()
-    {
-        throw new NotImplementedException();
+        return array;
     }
 
-    public bool MoveNext()
+    public static T[] Append<T>(this IEnumerable <T> collection, T text)
     {
-        throw new NotImplementedException();
+        T[] array = new T[collection.Count() + 1];
+        int index = 0;
+        foreach (var item in collection)
+        {
+            array[index] = item;
+            index++;
+        }
+
+        array[index++] = text;
+
+        return array;
     }
 
-    public void Reset()
+    public static IEnumerable<T> Prepend<T>(this IEnumerable <T> collection, T text)
     {
-        throw new NotImplementedException();
+        T[] array = new T[collection.Count() + 1];
+        int index = 1;
+        foreach (var item in collection)
+        {
+            array[index] = item;
+            index++;
+        }
+
+        array[0] = text;
+
+        return array;
     }
 }
