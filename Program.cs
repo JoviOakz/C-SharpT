@@ -13,9 +13,11 @@ var querySkip = list.Skip(3);
 var queryToArray = list.ToArray();
 var queryAppend = list.Append(3);
 var queryPrepend = list.Prepend(3);
-var queryChunk = list.Chunk(3);
+var queryEmpty = list.Empty();
+// var queryFirstOrDefault = list.FirstOrDefault();
+// var queryChunk = list.Chunk(3);
 // var queryZip = list.Zip();
-foreach (var item in queryTake)
+foreach (var item in queryEmpty)
     Console.WriteLine(item);
 
 public static class Enumerable
@@ -90,8 +92,17 @@ public static class Enumerable
         }
     }
 
-    public static IEnumerable<T[]> Chunk<T>(this IEnumerable <T> collection, int size)
+    public static bool Empty<T>(this IEnumerable <T> collection)
     {}
+
+    // public static T FirstOrDefault<T>(this IEnumerable <T> collection)
+    // {}
+
+    // public static IEnumerable<T[]> Chunk<T>(this IEnumerable <T> collection, int size)
+    // {}
+
+    // public static IEnumerable<T[]> Chunk<T>(this IEnumerable <T> collection, int size)
+    // {}
 
     // public static IEnumerable<(T, R)> Zip<T, R>(this IEnumerable <T> collection, IEnumerable<R> other)
     // {}
