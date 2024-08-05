@@ -6,11 +6,15 @@ List<int> list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 var queryCount = list.Count();
 Console.WriteLine(queryCount);
 
+Console.WriteLine();
+
 var queryTake = list.Take(3);
 var querySkip = list.Skip(3);
 var queryToArray = list.ToArray();
 var queryAppend = list.Append(3);
 var queryPrepend = list.Prepend(3);
+var queryChunk = list.Chunk(3);
+// var queryZip = list.Zip();
 foreach (var item in queryTake)
     Console.WriteLine(item);
 
@@ -85,4 +89,10 @@ public static class Enumerable
             yield return it.Current;
         }
     }
-}
+
+    public static IEnumerable<T[]> Chunk<T>(this IEnumerable <T> collection, int size)
+    {}
+
+    // public static IEnumerable<(T, R)> Zip<T, R>(this IEnumerable <T> collection, IEnumerable<R> other)
+    // {}
+} 
