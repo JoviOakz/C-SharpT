@@ -1,6 +1,8 @@
 ﻿// Console.BackgroundColor = ConsoleColor.Magenta;
 // Console.WriteLine("Hello, World!");
 
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
 // List<int> list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // var queryCount = list.Count();
@@ -105,14 +107,12 @@
 //     // {}
 // } 
 
-
-
-
-
+// ------------------------------------------------------------------------------------------------------------------------------------------
 
 // Action<string> print = Console.WriteLine;
 // print("Hello World!");
 
+// ------------------------------------------------------------------------------------------------------------------------------------------
 
 // Func<int, int, int> sum = (a, b) => a + b;
 // var result = sum(1, 2);
@@ -121,11 +121,80 @@
 
 // public delegate R Func<T, R>(T obj);
 
+// ------------------------------------------------------------------------------------------------------------------------------------------
 
-var chamaNVezes = (Action func, int n) =>
+// var chamaNVezes = (Action func, int n) =>
+// {
+//     for (int i = 0; i < n; i++)
+//         func();
+// };
+
+// chamaNVezes(() => Console.WriteLine("Olá Mundo!"), 100);
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+// int[] valores = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+// Func<int[], int, Func<int, int[]>> paginacao = (dados, tamanho) =>
+// {
+//     return (pagina) =>
+//     {
+//         int[] paginaDados = new int[tamanho];
+//         Array.Copy(
+//             dados, tamanho * pagina,
+//             paginaDados, 0,
+//             tamanho
+//         );
+
+//         return paginaDados;
+//     };
+// };
+
+// var paginas = paginacao(valores, 4);
+
+// var dadosDaPagina2 = paginas(2);
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+// Func<Func<int>> closure = () =>
+// {
+//     int count = 0;
+//     return () => ++count;
+// };
+
+// var contador = closure();
+// Console.WriteLine(contador());
+// Console.WriteLine(contador());
+// Console.WriteLine(contador());
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+// Func<object, (object data, Action<object> setData)> useState = (object data) =>
+// {
+//     var value = data;
+//     return (value, (object newValue) => value = newValue);
+// };
+
+// var (value, setValue) = useState(8);
+// setValue(12);
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+List<int> minhaLista = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+var pares = minhaLista.Where((element) => element % 2 == 0);
+
+public static class Enumerable
 {
-    for (int i = 0; i < n; i++)
-        func();
-};
-
-chamaNVezes(() => Console.WriteLine("Olá Mundo!"), 100);
+    public static IEnumerable<T> Where<T>(
+        this IEnumerable<T> collection,
+        Func<T, bool> filter
+    )
+    {
+        foreach (var item in collection)
+        {
+            if (filter(item))
+                yield return item;
+        }
+    }
+}
