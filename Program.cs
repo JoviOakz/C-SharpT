@@ -110,16 +110,22 @@
 
 
 
+// Action<string> print = Console.WriteLine;
+// print("Hello World!");
 
 
-Action<string, int> print = minhafunc;
+// Func<int, int, int> sum = (a, b) => a + b;
+// var result = sum(1, 2);
 
-print("potato", 4);
+// Console.WriteLine(result);
 
-void minhafunc(string s, int n)
+// public delegate R Func<T, R>(T obj);
+
+
+var chamaNVezes = (Action func, int n) =>
 {
     for (int i = 0; i < n; i++)
-    {
-        Console.WriteLine(s);
-    }
-}
+        func();
+};
+
+chamaNVezes(() => Console.WriteLine("Olá Mundo!"), 100);
