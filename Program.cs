@@ -180,21 +180,34 @@
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-List<int> minhaLista = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// List<int> minhaLista = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-var pares = minhaLista.Where((element) => element % 2 == 0);
+// var pares = minhaLista.Where((element) => element % 2 == 0);
+
+// public static class Enumerable
+// {
+//     public static IEnumerable<T> Where<T>(
+//         this IEnumerable<T> collection,
+//         Func<T, bool> filter
+//     )
+//     {
+//         foreach (var item in collection)
+//         {
+//             if (filter(item))
+//                 yield return item;
+//         }
+//     }
+// }
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
 
 public static class Enumerable
 {
-    public static IEnumerable<T> Where<T>(
+    public static IEnumerable<R> Select<T, R>(
         this IEnumerable<T> collection,
-        Func<T, bool> filter
+        Func<T, R> mapper
     )
     {
-        foreach (var item in collection)
-        {
-            if (filter(item))
-                yield return item;
-        }
+        
     }
 }
