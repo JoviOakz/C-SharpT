@@ -347,9 +347,17 @@ static void readAll()
 
     while (line is not null)
     {
-        Console.WriteLine(line);
         line = reader.ReadLine();
     }
 }
 
 readAll();
+
+public static class Enumerable
+{
+    public static string Percentage<T>(
+        this IEnumerable<T> collection, Func<T, bool> calc)
+        {
+            
+        }
+}
