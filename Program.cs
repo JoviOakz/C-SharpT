@@ -339,25 +339,34 @@
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-static void readAll()
-{
-    using var reader = new StreamReader("INFLUD21-01-05-2023.csv");
+// static void readAll()
+// {
+//     using var reader = new StreamReader("INFLUD21-01-05-2023.csv");
 
-    string line = reader.ReadLine();
+//     string line = reader.ReadLine();
 
-    while (line is not null)
-    {
-        line = reader.ReadLine();
-    }
-}
+//     while (line is not null)
+//     {
+//         line = reader.ReadLine();
+//     }
+// }
 
-readAll();
+// readAll();
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
 
 public static class Enumerable
 {
     public static string Percentage<T>(
         this IEnumerable<T> collection, Func<T, bool> calc)
+    {
+        using var reader = new StreamReader("INFLUD21-01-05-2023.csv");
+
+        string line = reader.ReadLine();
+
+        while (line is not null)
         {
-            
+            line = reader.ReadLine();
         }
+    }
 }
