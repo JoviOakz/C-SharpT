@@ -201,7 +201,7 @@
 
 // List<string> minhaLista = ["1", "2", "3", "4", "5"];
 
-// var pares = minhaLista.Select<string, int>(int.Parse);
+// var numbers = minhaLista.Select<string, int>(int.Parse);
 
 // public static class Enumerable
 // {
@@ -209,37 +209,65 @@
 //         this IEnumerable<T> collection, Func<T, R> mapper)
 //     {
 //         foreach (var item in collection)
-//         {
 //             yield return mapper(item);
+//     }
+// }
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+// List<int> minhaLista = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+// var myList = minhaLista.TakeWhile(x => x != 6);
+
+// foreach (var item in myList)
+// {
+//     Console.WriteLine(item);
+// }
+
+// public static class Enumerable
+// {
+//     public static IEnumerable<T> TakeWhile<T>(
+//         this IEnumerable<T> collection, Func<T, bool> predicate)
+//     {
+//         foreach (var item in collection)
+//         {
+//             if (predicate(item))
+//                 yield return item;
+//             else
+//                 break;
 //         }
 //     }
 // }
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-List<int> minhaLista = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-public static class Enumerable
-{
-    public static IEnumerable<T> TakeWhile<T>(
-        this IEnumerable<T> collection, Func<T, bool> predicate)
-    {
-        
-    }
-}
-
-// ------------------------------------------------------------------------------------------------------------------------------------------
-
-// var email = "meuemail@mail.com";
+// string email = "meuemail@mail.com";
 
 // var provedor = email.SkipWhile(c => c != '@');
+
+// foreach (var item in provedor)
+// {
+//     Console.Write(item);  
+// }
 
 // public static class Enumerable
 // {
 //     public static IEnumerable<T> SkipWhile<T>(
 //         this IEnumerable<T> collection, Func<T, bool> predicate)
 //     {
+//         bool mySwitch = false;
         
+//         foreach (var item in collection)
+//         {
+//             if (mySwitch)
+//                 yield return item;
+
+//             else if (!predicate(item))
+//             {
+//                 mySwitch = true;
+//                 yield return item;
+//             }
+//         }
 //     }
 // }
 
@@ -255,7 +283,18 @@ public static class Enumerable
 //     public static T MaxBy<T>(
 //         this IEnumerable<T> collection, Func<T, double> selector)
 //     {
-        
+//         var it = collection.GetEnumerator();
+//         it.MoveNext();
+
+//         var maxValue = it.Current;
+
+//         foreach (var item in collection)
+//         {
+//             if (selector(it.Current) > selector(maxValue))
+//                 maxValue = it.Current;
+//         }
+
+//         return maxValue;
 //     }
 // }
 
@@ -264,19 +303,28 @@ public static class Enumerable
 // public static class Enumerable
 // {
 //     public static bool Any<T>(
-//         this IEnumerable<T> collection, Func<T, double> predicate)
+//         this IEnumerable<T> collection, Func<T, bool> predicate)
 //     {
+//         foreach (var item in collection)
+//             if (predicate(item))
+//                 return true;
         
+//         return false;
 //     }
 // }
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-// public static class Enumerable
-// {
-//     public static R Aggregate<T, R>(
-//         this IEnumerable<T> collection, Func<T, R, R> acc, R seed)
-//     {
-        
-//     }
-// }
+public static class Enumerable
+{
+    public static R Aggregate<T, R>(
+        this IEnumerable<T> collection, Func<T, R, R> acc, R seed)
+    {
+        foreach (var item in collection)
+        {
+            seed = acc(item, seed);
+        }
+
+        return seed;
+    }
+}
