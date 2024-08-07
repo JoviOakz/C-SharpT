@@ -482,3 +482,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Covid-19 data
+INFLUD21-01-05-2023.csv

@@ -315,16 +315,41 @@
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-public static class Enumerable
-{
-    public static R Aggregate<T, R>(
-        this IEnumerable<T> collection, Func<T, R, R> acc, R seed)
-    {
-        foreach (var item in collection)
-        {
-            seed = acc(item, seed);
-        }
+// List<int> list = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// var query =
+//     from item in list
+//     where item % 2 == 0
+//     group item by item % 10 into g
+//     where g.Count() > 1
+//     select g;
 
-        return seed;
+// public static class Enumerable
+// {
+//     public static R Aggregate<T, R>(
+//         this IEnumerable<T> collection, Func<T, R, R> acc, R seed)
+//     {
+//         foreach (var item in collection)
+//         {
+//             seed = acc(item, seed);
+//         }
+
+//         return seed;
+//     }
+// }
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+static void readAll()
+{
+    using var reader = new StreamReader("INFLUD21-01-05-2023.csv");
+
+    string line = reader.ReadLine();
+
+    while (line is not null)
+    {
+        Console.WriteLine(line);
+        line = reader.ReadLine();
     }
 }
+
+readAll();
