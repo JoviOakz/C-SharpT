@@ -187,9 +187,7 @@
 // public static class Enumerable
 // {
 //     public static IEnumerable<T> Where<T>(
-//         this IEnumerable<T> collection,
-//         Func<T, bool> filter
-//     )
+//         this IEnumerable<T> collection, Func<T, bool> filter)
 //     {
 //         foreach (var item in collection)
 //         {
@@ -201,13 +199,84 @@
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
+// List<string> minhaLista = ["1", "2", "3", "4", "5"];
+
+// var pares = minhaLista.Select<string, int>(int.Parse);
+
+// public static class Enumerable
+// {
+//     public static IEnumerable<R> Select<T, R>(
+//         this IEnumerable<T> collection, Func<T, R> mapper)
+//     {
+//         foreach (var item in collection)
+//         {
+//             yield return mapper(item);
+//         }
+//     }
+// }
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+List<int> minhaLista = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 public static class Enumerable
 {
-    public static IEnumerable<R> Select<T, R>(
-        this IEnumerable<T> collection,
-        Func<T, R> mapper
-    )
+    public static IEnumerable<T> TakeWhile<T>(
+        this IEnumerable<T> collection, Func<T, bool> predicate)
     {
         
     }
 }
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+// var email = "meuemail@mail.com";
+
+// var provedor = email.SkipWhile(c => c != '@');
+
+// public static class Enumerable
+// {
+//     public static IEnumerable<T> SkipWhile<T>(
+//         this IEnumerable<T> collection, Func<T, bool> predicate)
+//     {
+        
+//     }
+// }
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+// List<Pessoa> pessoas = [];
+
+// Pessoa maisVelho = pessoas.MaxBy(p => p.idade);
+// record Pessoa(string nome, int idade);
+
+// public static class Enumerable
+// {
+//     public static T MaxBy<T>(
+//         this IEnumerable<T> collection, Func<T, double> selector)
+//     {
+        
+//     }
+// }
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+// public static class Enumerable
+// {
+//     public static bool Any<T>(
+//         this IEnumerable<T> collection, Func<T, double> predicate)
+//     {
+        
+//     }
+// }
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
+// public static class Enumerable
+// {
+//     public static R Aggregate<T, R>(
+//         this IEnumerable<T> collection, Func<T, R, R> acc, R seed)
+//     {
+        
+//     }
+// }
