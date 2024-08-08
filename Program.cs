@@ -355,18 +355,48 @@
 
 // ------------------------------------------------------------------------------------------------------------------------------------------
 
-public static class Enumerable
-{
-    public static string Percentage<T>(
-        this IEnumerable<T> collection, Func<T, bool> calc)
-    {
-        using var reader = new StreamReader("INFLUD21-01-05-2023.csv");
+// static void readAll()
+// {
+//     using var reader = new StreamReader("INFLUD21-01-05-2023.csv");
 
-        string line = reader.ReadLine();
+//     var myList = new List<string[]>();
 
-        while (line is not null)
-        {
-            line = reader.ReadLine();
-        }
-    }
-}
+//     string line = reader.ReadLine();
+//     while (line is not null)
+//     {
+//         var data = line.Replace("\"", "").Split(";");
+
+//         if (data[106] == "5")
+//             myList.Add(data);
+
+//         line = reader.ReadLine();
+//     }
+
+//     var deaths = myList
+//         .Where(x => x[109] == "2")
+//         .GroupBy(x => x[4])
+//         .OrderBy(x => x.Count());
+
+//     var vacinateds = myList
+//         .Where(x => x[109] == "2")
+//         .Where(x => x[154] == "1")
+//         .GroupBy(x => x[4])
+//         .OrderBy(x => x.Count());
+
+//     var notVacinateds = myList
+//         .Where(x => x[109] == "2")
+//         .Where(x => x[154] == "2")
+//         .GroupBy(x => x[4])
+//         .OrderBy(x => x.Count());
+
+//     foreach (var item in myList)
+//     {
+//         Console.WriteLine($"");
+//         Console.WriteLine($"{} : {}");
+//     }
+// }
+
+// readAll();
+
+// ------------------------------------------------------------------------------------------------------------------------------------------
+
